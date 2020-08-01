@@ -1,6 +1,6 @@
 # Data structure and algorithm
 
-![Build Status Badge](https://circleci.com/gh/ngtrhieu/ds-algo/tree/master.svg?style=shield)
+[![Build Status](https://circleci.com/gh/ngtrhieu/ds-algo.svg?style=shield&circle-token=63b8a2f9baea46939f33400c7bbebbb02e11bcd0)](https://github.com/ngtrhieu/ds-algo)
 
 Data structure and algorithms practice in JavaScript.
 
@@ -21,10 +21,12 @@ Data structure and algorithms practice in JavaScript.
 - [ ] [QuickSort](src/algorithms/quickSort.js)
 
 **Path findings**
+
 - [ ] [Djikstra](src/algorithms/dijkstra.js)
-- [ ] [A*](src/algorithms/astar.js)
+- [ ] [A\*](src/algorithms/astar.js)
 
 ### Data Structures
+
 - [ ] [List]()
 - [ ] [Queue]()
 - [ ] [Stack]()
@@ -34,6 +36,4 @@ Data structure and algorithms practice in JavaScript.
 
 ### Dynamic Progamming Problems
 
-
 ### Programming Patterns
-
