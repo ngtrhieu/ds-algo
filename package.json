@@ -6,23 +6,30 @@
   "author": "ngtrhieu",
   "license": "MIT",
   "scripts": {
-    "test": "jest --coverage"
+    "prettier": "prettier --config .prettierrc.json --write 'src/**/*.js'",
+    "lint": "eslint src",
+    "test": "jest --coverage",
+    "test:ci": "jest --coverage"
   },
   "devDependencies": {
     "@babel/core": "^7.11.0",
     "@babel/preset-env": "^7.11.0",
     "@commitlint/cli": "^9.1.1",
     "@commitlint/config-conventional": "^9.1.1",
-    "chalk": "^4.1.0",
+    "babel-eslint": "^10.1.0",
     "commitizen": "^4.1.2",
     "cz-conventional-changelog": "3.2.0",
     "eslint": "^7.5.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-prettier": "^3.1.4",
     "husky": "^4.2.5",
     "jest": "^26.2.2",
     "prettier": "^2.0.5"
   },
   "husky": {
     "hooks": {
+      "pre-commit": "yarn lint",
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
