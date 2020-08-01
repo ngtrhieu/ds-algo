@@ -1,5 +1,5 @@
 /**
- * Perform heapify a subheap with root at {index}
+ * Perform heaptify a subheap with root at {index}
  * @param {Array} arr - the array of elements to sort
  * @param {Func} comparer - the comparer between two elements
  * @param {number} size - the size of the heap array
@@ -7,11 +7,10 @@
  *
  * @returns {Array} arr - the same array passed in
  */
-const heapify = (arr, comparer, size, index) => {
-  // find the index of the largest elem among the parent and its 2 children
+const heaptify = (arr, comparer, size, index) => {
   let largest = index;
-  const left = 2 * index + 1;
-  const right = 2 * index + 2;
+  const left = 2 * largest + 1;
+  const right = 2 * largest + 2;
 
   if (left < size && comparer(arr[left], arr[largest]) > 0) {
     largest = left;
@@ -22,9 +21,8 @@ const heapify = (arr, comparer, size, index) => {
   }
 
   if (largest !== index) {
-    // swap the parent and its largest child, then continue heaping
     [arr[index], arr[largest]] = [arr[largest], arr[index]];
-    heapify(arr, comparer, size, largest);
+    heaptify(arr, comparer, size, largest);
   }
 
   return arr;
@@ -44,12 +42,12 @@ export default (arr, comparer = (a, b) => a - b) => {
   const size = result.length;
 
   for (let i = size - 1; i >= 0; --i) {
-    heapify(result, comparer, size, i);
+    heaptify(result, comparer, size, i);
   }
 
   for (let i = size - 1; i >= 0; --i) {
     [result[0], result[i]] = [result[i], result[0]];
-    heapify(result, comparer, i, 0);
+    heaptify(result, comparer, i, 0);
   }
 
   return result;

@@ -65,7 +65,7 @@ export default ({ algorithm, it, expect }) => {
 
       const sorted = algorithm(arr);
       expect(
-        _.every(sorted, (val, index) => !index || val >= sorted[index - 1]),
+        _.every(sorted, (_, i) => !i || sorted[i] >= sorted[i - 1]),
       ).toBeTruthy();
     });
   });
@@ -76,7 +76,7 @@ export default ({ algorithm, it, expect }) => {
 
     const sorted = algorithm(arr);
     expect(
-      _.every(sorted, (val, index) => !index || val >= sorted[index - 1]),
+      _.every(sorted, (_, i) => !i || sorted[i] >= sorted[i - 1]),
     ).toBeTruthy();
   });
 };
