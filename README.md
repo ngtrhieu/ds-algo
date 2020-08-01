@@ -8,7 +8,7 @@ Data structure and algorithms practice in JavaScript.
 
 **Searching algorithms**
 
-- [ ] [BinarySearch](src/algorithms/binarySearch.js)
+- [x] [BinarySearch](src/algorithms/binarySearch.js)
 - [ ] [BFS](src/algorithms/bfs.js)
 - [ ] [DFS](src/algorithms/dfs.js)
 
