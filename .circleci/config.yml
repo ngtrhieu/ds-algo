@@ -1,7 +1,45 @@
 version: 2.1
 orbs:
   node: circleci/node@3.0.0
+
+aliases:
+  - &root-yarn |
+    yarn install --non-interactive --cache-folder ~/.cache/yarn
+
+  - &root-restore-yarn-cache
+    keys:
+      - root-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+      - root-yarn-{{ .Branch }}-
+
+  - &root-save-yarn-cache
+    paths:
+      - node_modules
+      - ~/.cache/yarn
+    key: root-yarn-{{ .Branch }}-{{ checksum "yarn.lock" }}
+
+jobs:
+  lint:
+    steps:
+      - checkout
+      - restore-cache: *root-restore-yarn-cache
+      - run: *root-yarn
+      - save-cache: *root-save-yarn-cache
+      - run:
+        name: lint
+        command: yarn lint
+    steps:
+      - checkout
+      - restore-cache: *root-restore-yarn-cache
+      - run: *root-yarn
+      - save-cache: *root-save-yarn-cache
+      - run:
+          name: Test
+          command: yarn test:ci
+
 workflows:
-  node-tests:
+  lint:
     jobs:
-      - node/test
+      - lint
+  test:
+    jobs:
+      - test
