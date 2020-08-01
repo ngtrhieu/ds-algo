@@ -1,5 +1,7 @@
 # Data structure and algorithm
 
+![Build Status Badge](https://circleci.com/gh/ngtrhieu/ds-algo/tree/master.svg?style=shield)
+
 Data structure and algorithms practice in JavaScript.
 
 ## Table of Content
