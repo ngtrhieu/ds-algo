@@ -13,7 +13,7 @@ export const bisectLeft = (arr, target, comparer = (a, b) => a - b) => {
   let right = arr.length;
 
   while (left < right) {
-    const mid = Math.floor((left + right) / 2);
+    const mid = (left + right) >>> 1;
     const compare = comparer(arr[mid], target);
 
     if (compare < 0) {
@@ -41,7 +41,7 @@ export const bisectRight = (arr, target, comparer = (a, b) => a - b) => {
   let right = arr.length;
 
   while (left < right) {
-    const mid = Math.floor((left + right) / 2);
+    const mid = (left + right) >>> 1;
     const compare = comparer(arr[mid], target);
 
     if (compare <= 0) {
@@ -51,7 +51,7 @@ export const bisectRight = (arr, target, comparer = (a, b) => a - b) => {
     }
   }
 
-  return left;s
+  return left;
 };
 
 /**
@@ -69,12 +69,12 @@ export default (arr, target, comparer = (a, b) => a - b) => {
   let right = arr.length;
 
   while (left < right) {
-    const mid = Math.floor((left + right) / 2);
+    const mid = (left + right) >>> 1;
     const compare = comparer(arr[mid], target);
 
-    if (compare === 0) return mid;
-
-    if (compare < 0) {
+    if (compare === 0) {
+      return mid;
+    } else if (compare < 0) {
       left = mid + 1;
     } else {
       right = mid;
