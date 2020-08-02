@@ -1,20 +1,20 @@
 import _ from 'lodash';
 
-export default ({ algorithm, it, expect }) => {
-  it('empty input', () => {
+export default ({ algorithm, test, expect }) => {
+  test('empty input', () => {
     expect(algorithm([])).toEqual([]);
   });
 
-  it('one element', () => {
+  test('one element', () => {
     expect(algorithm([0])).toEqual([0]);
   });
 
-  it('two elements', () => {
+  test('two elements', () => {
     expect(algorithm([1, 2])).toEqual([1, 2]);
     expect(algorithm([2, 1])).toEqual([1, 2]);
   });
 
-  it('three or more elements', () => {
+  test('three or more elements', () => {
     expect(algorithm([10, 2, 4])).toEqual([2, 4, 10]);
     expect(algorithm([4, 5, 6, 1, 2, 3])).toEqual([1, 2, 3, 4, 5, 6]);
     expect(algorithm([1, 2, 3, 4, 5, 0])).toEqual([0, 1, 2, 3, 4, 5]);
@@ -58,7 +58,7 @@ export default ({ algorithm, it, expect }) => {
     expect(algorithm([7, 2, 4, 3, 1, 2])).toEqual([1, 2, 2, 3, 4, 7]);
   });
 
-  it('random generated test', () => {
+  test('random generated test', () => {
     _.times(1000, () => {
       const arr = [];
       _.times(1000, () => arr.push(Math.ceil(Math.random() * 100) - 50));
@@ -70,9 +70,9 @@ export default ({ algorithm, it, expect }) => {
     });
   });
 
-  it('stress test', () => {
+  test('stress test', () => {
     const arr = [];
-    _.times(1000000, () => arr.push(Math.ceil(Math.random() * 100) - 50));
+    _.times(100000, () => arr.push(Math.ceil(Math.random() * 100) - 50));
 
     const sorted = algorithm(arr);
     expect(
