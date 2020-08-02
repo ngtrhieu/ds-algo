@@ -55,6 +55,34 @@ export const bisectRight = (arr, target, comparer = (a, b) => a - b) => {
 };
 
 /**
+ * Given a `array` that are sorted by `comparer` and rorated by an unknown `pivot`, returns `pivot`
+ * @param {Array} arr
+ * @param {Func} comparer
+ *
+ * @returns {number} - the rotated `pivot`
+ */
+export const findPivot = (arr, comparer = (a, b) => a - b) => {
+  let left = 0;
+  let right = arr.length - 1;
+
+  while (left < right) {
+    if (comparer(arr[left], arr[right]) < 0) break;
+
+    const mid = (left + right) >>> 1;
+
+    if (comparer(arr[left], arr[mid]) <= 0) {
+      left = mid + 1;
+    } else if (comparer(arr[mid], arr[right]) <= 0) {
+      right = mid;
+    } else {
+      throw new Error('invalid input');
+    }
+  }
+
+  return left;
+};
+
+/**
  * Binary search the `target` inside the `arr` using `comparer`
  * Assume that the array `arr` is already sorted.
  *

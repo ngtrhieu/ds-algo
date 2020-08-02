@@ -1,4 +1,8 @@
-import binarySearch, { bisectLeft, bisectRight } from './binarySearch';
+import binarySearch, {
+  bisectLeft,
+  bisectRight,
+  findPivot,
+} from './binarySearch';
 
 describe('binarySearch', () => {
   test('empty', () => {
@@ -66,5 +70,48 @@ describe('bisectRight', () => {
 
   test('empty', () => {
     expect(bisectRight([], 1)).toBe(0);
+  });
+});
+
+describe('findPivot', () => {
+  test('empty', () => {
+    expect(findPivot([])).toBe(0);
+  });
+
+  test('one elem', () => {
+    expect(findPivot([0])).toBe(0);
+  });
+
+  test('unrorated array', () => {
+    expect(findPivot([0, 1])).toBe(0);
+    expect(findPivot([0, 1, 2])).toBe(0);
+    expect(findPivot([0, 1, 2, 3])).toBe(0);
+  });
+
+  test('rotated by 1', () => {
+    expect(findPivot([1, 0])).toBe(1);
+    expect(findPivot([2, 0, 1])).toBe(1);
+    expect(findPivot([3, 0, 1, 2])).toBe(1);
+  });
+
+  test('rotated by n-1', () => {
+    expect(findPivot([1, 0])).toBe(1);
+    expect(findPivot([1, 2, 0])).toBe(2);
+    expect(findPivot([1, 2, 3, 0])).toBe(3);
+  });
+
+  test('rotated by other amount', () => {
+    expect(findPivot([4, 5, 6, 7, 0, 1, 2])).toBe(4);
+    expect(findPivot([3, 4, 0, 1, 2, 3, 3])).toBe(2);
+  });
+
+  test('duplicate elements', () => {
+    expect(findPivot([1, 2, 2, 0])).toBe(3);
+    expect(findPivot([1, 1, 2, 2, 0])).toBe(4);
+    expect(findPivot([1, 1, 1, 1, 1, 1, 1, 1])).toBe(7); // any pivot is correct
+  });
+
+  test('descreasing array', () => {
+    expect(() => findPivot([3, 2, 1, 0])).toThrow(Error);
   });
 });
