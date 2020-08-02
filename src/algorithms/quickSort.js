@@ -1,32 +1,32 @@
 const quickSort = (arr, comparer, start, end) => {
-  const partition = (start, end) => {
-    const pivot = arr[end];
+  const queue = [[start, end]];
 
-    let i = start;
-    for (let j = start; j <= end; ++j) {
+  const partition = (lo, hi) => {
+    const pivot = arr[hi];
+
+    let i = lo;
+    for (let j = lo; j <= hi; ++j) {
       if (comparer(arr[j], pivot) < 0) {
         [arr[i], arr[j]] = [arr[j], arr[i]];
         ++i;
       }
     }
 
-    [arr[i], arr[end]] = [arr[end], arr[i]];
+    [arr[i], arr[hi]] = [arr[hi], arr[i]];
     return i;
   };
 
-  const quickSortImpl = (start, end) => {
-    if (start < end) {
-      const pivot = partition(start, end);
-      queue.push([start, pivot - 1]);
-      queue.push([pivot + 1, end]);
+  const quickSortImpl = (s, t) => {
+    if (s < t) {
+      const pivot = partition(s, t);
+      queue.push([s, pivot - 1]);
+      queue.push([pivot + 1, t]);
     }
   };
 
-  const queue = [[start, end]];
-
   while (queue.length) {
-    const [start, end] = queue.shift();
-    quickSortImpl(start, end);
+    const [s, t] = queue.shift();
+    quickSortImpl(s, t);
   }
 };
 
