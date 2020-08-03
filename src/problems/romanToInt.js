@@ -9,7 +9,7 @@ export default function romanToInt(roman) {
     M: 1000,
   };
 
-  s = roman.toUpperCase();
+  const s = roman.toUpperCase();
 
   let num = 0;
   for (let i = 0; i < s.length; ++i) {
