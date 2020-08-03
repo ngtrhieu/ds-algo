@@ -1,3 +1,11 @@
+/**
+ * Crack the Coding Interview
+ * Chapter 1
+ * Problem 2
+ * Given two strings, write a method to decide if one is a permutation of the
+ * other.
+ */
+
 import _ from 'lodash';
 
 export const checkPermutationTrivial = str =>
