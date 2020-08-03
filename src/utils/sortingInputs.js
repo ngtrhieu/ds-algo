@@ -59,9 +59,9 @@ export default ({ algorithm, test, expect }) => {
   });
 
   test('random generated test', () => {
-    _.times(1000, () => {
+    _.times(100, () => {
       const arr = [];
-      _.times(1000, () => arr.push(Math.ceil(Math.random() * 100) - 50));
+      _.times(100, () => arr.push(Math.ceil(Math.random() * 100) - 50));
 
       const sorted = algorithm(arr);
       expect(
@@ -72,7 +72,7 @@ export default ({ algorithm, test, expect }) => {
 
   test('stress test', () => {
     const arr = [];
-    _.times(10000, () => arr.push(Math.ceil(Math.random() * 100) - 50));
+    _.times(1000, () => arr.push(Math.ceil(Math.random() * 100) - 50));
 
     const sorted = algorithm(arr);
     expect(
