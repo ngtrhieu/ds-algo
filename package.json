@@ -8,9 +8,9 @@
   "scripts": {
     "prettier": "prettier --config .prettierrc.json --write 'src/**/*.js'",
     "lint": "eslint src",
-    "test": "yarn prettier && yarn lint && jest --coverage --verbose",
-    "test:watch": "jest --verbose --watch",
-    "test:ci": "jest --coverage --runInBand"
+    "test": "yarn prettier && yarn lint && jest",
+    "test:watch": "jest --watch",
+    "test:ci": "jest --runInBand"
   },
   "devDependencies": {
     "@babel/core": "^7.11.0",
