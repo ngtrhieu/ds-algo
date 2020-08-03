@@ -9,26 +9,18 @@
  * Result: nothing is returned, but the new linked list looks like a - >b- >d - >e- >f
  */
 
-export const deleteMiddleMode = (list, deleted) => {
-  if (!deleted) return list;
-  if (!list) return list;
-
-  // handle first element match
-  if (list === deleted) {
-    const { next } = list;
-    list.next = null;
-    return next;
-  }
-
-  // handle subsequent element match
-  let curr = list;
+export const deleteMiddleMode = deleted => {
+  let prev = null;
+  let curr = deleted;
   while (curr) {
-    if (curr.next === deleted) {
-      curr.next = deleted.next;
-      break;
+    if (curr.next) {
+      curr.val = curr.next.val;
+    } else {
+      curr.val = null;
+      curr.next = null;
+      if (prev) prev.next = null;
     }
+    prev = curr;
     curr = curr.next;
   }
-
-  return list;
 };
