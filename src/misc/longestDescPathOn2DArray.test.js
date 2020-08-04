@@ -6,6 +6,13 @@ describe('longestPath', () => {
     expect(longestPath([], 0, 0)).toBe(0);
   });
 
+  test('invalid input', () => {
+    expect(longestPath([[9]], -1, 0)).toBe(0);
+    expect(longestPath([[9]], 0, -1)).toBe(0);
+    expect(longestPath([[9]], 2, 0)).toBe(0);
+    expect(longestPath([[9]], 0, 2)).toBe(0);
+  });
+
   test('1x1 matrix', () => {
     expect(longestPath([[9]], 0, 0)).toBe(1);
   });
