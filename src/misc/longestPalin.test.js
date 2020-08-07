@@ -1,4 +1,4 @@
-import { longestPalin } from './longestPalin';
+import { longestPalin, manachers } from './longestPalin';
 
 const testCases = algo => {
   it('empty', () => {
@@ -48,4 +48,5 @@ const testCases = algo => {
 
 describe('longestPalin', () => {
   describe('slowMethod', () => testCases(longestPalin));
+  describe('mamachers', () => testCases(manachers));
 });
