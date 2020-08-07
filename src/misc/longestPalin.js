@@ -67,7 +67,7 @@ export const manachers = str => {
     }
 
     // early termination.
-    if (right >= arr.length) break;
+    if (right >= arr.length - 1) break;
   }
 
   return maxLength;

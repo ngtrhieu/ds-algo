@@ -44,9 +44,13 @@ const testCases = algo => {
     expect(algo('cbcdcbcecbcd')).toBe(9);
     expect(algo('cbcdcbceecbcd')).toBe(10);
   });
+
+  it('full palin', () => {
+    expect(algo('01234567899876543210')).toBe(20);
+  });
 };
 
 describe('longestPalin', () => {
   describe('slowMethod', () => testCases(longestPalin));
-  describe('mamachers', () => testCases(manachers));
+  describe('manachers', () => testCases(manachers));
 });
