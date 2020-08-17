@@ -1,0 +1,128 @@
+/*
+Libs included:
+    underscore lodash chai sinon sinon-chai mocha async request q bluebird jsdom
+*/
+
+//console.log('Hello, world!');
+
+// "internationalization" -> abbrev("internationalization") -> "i18n"
+
+const abbrev = str => {
+    // if (!str || !_.isString(str)) return null;
+
+    // ab => ab
+    // abc => a1c
+    // abcd => a2d
+
+    if (str.length < 3) return str;
+
+    return [str[0], str.length - 2, str[str.length - 1]].join('');
+}
+
+/*
+console.log(abbrev("internationalization"))
+console.log(abbrev("ab"))
+console.log(abbrev("abc"))
+console.log(abbrev("a"))
+console.log(abbrev(""))
+*/
+
+
+// No 2
+// "apple-banana_cat" -> abbrevPlus("apple-banana-cat") -> "a3e-b4a_c1t"
+// separators: "-", "_"
+
+// apple-banana_cat -> a3e-b4a-c1t WRONG
+
+const abbrevPlus = str => {
+
+    if (str.length < 3) return str;
+
+    const sb = [];    // string builder
+
+    let last = '';
+    let count = 0;
+
+    for (let i = 0; i < str.length; ++i) {
+        const c = str[i];
+
+        if (c === '-' || c === '_') {
+            if (count === 2) {
+                sb.push(last);
+                count = 0;
+                last = '';
+            } else if (count > 2) {
+                sb.push(count - 2);
+                sb.push(last);
+                count = 0;
+                last = '';
+            }
+            sb.push(c);
+        } else {
+            if (count === 0) {
+                sb.push(c);
+            }
+            ++count;
+            last = c;
+        }
+    }
+
+    if (count === 2) {
+        sb.push(last);
+    } else if (count > 2) {
+        sb.push(count - 2);
+        sb.push(last);
+    }
+
+    return sb.join('');
+}
+
+/*
+console.log(abbrevPlus("apple-banana_cat"))
+console.log(abbrevPlus("apple-banana_cat_"))
+console.log(abbrevPlus("_apple-banana_cat_"))
+console.log(abbrevPlus("_apple-banana_cat_"))
+console.log(abbrevPlus("_apple-_cat_"))
+console.log(abbrevPlus("_apple-_c_"))
+*/
+
+// No. 3: cache
+// callApi is synchonous
+
+function callApi(endpoint) {
+  console.log(`call ${endpoint}`) // <- 5 sec
+  return `result of ${endpoint}`
+}
+
+//callApi('shopee') // call shopee, result of shopee
+//callApi('shopee') // call shopee, result of shopee
+
+function cache(func) {
+    const cache = {};
+    return function() {
+        var key = JSON.stringify(arguments);
+        if (cache[key]) {
+            console.log(`using cache for ${arguments[0]}`);
+            return cache[key];
+        } else {
+            const result = func.apply(null, arguments);
+            cache[key] = result;
+            return result;
+        }
+    }
+}
+
+const cachedCallApi = cache(callApi)
+
+console.log(cachedCallApi('shopee')) // call shopee, result of shopee
+console.log(cachedCallApi('shopee')) // result of shopee
+console.log(cachedCallApi('google')) // call google, result of google
+console.log(cachedCallApi('google')) // result of google
+console.log(cachedCallApi('google')) // result of google
+
+
+
+
+
+
+
