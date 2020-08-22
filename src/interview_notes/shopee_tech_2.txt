@@ -1,0 +1,151 @@
+/*
+Libs included:
+    underscore lodash chai sinon sinon-chai mocha async request q bluebird jsdom
+
+Question: Given a list of integers of size n in the range of (1, M), return any duplicate. n > M
+*/
+
+console.log('Hello, world!');
+
+
+const findDuplicate1 = (arr, n, m) => {
+    const size = arr.length;
+
+    const hash = {}; // initialize array of size M, starting false  -> might need many iteration of allocation
+
+    // hashing function: item => item
+
+
+    for (let i = 0; i < size; ++i) {
+        const item = arr[i];
+
+        if (hash[item])   // O(1)
+            return item;
+
+        hash[item] = true;
+    }
+
+    return -1;
+}
+
+// TC: O(N)
+// SC: O(M)
+
+// collision - bucket - linked list / binary search tree / double hash
+
+/*
+    space complexity: <O(M)
+*/
+
+// sort the array, window looping
+// quicksort O(logn) space / heap sort O(1) space
+
+// javascript: small -> O(n^2)
+// combination of quick sort and heap sort
+
+
+
+/*
+    O(mlogm) < O(nlogn) time   /// ????
+    O(1) < O(M) space
+    1 2 3 1 2 3
+    ^     ^
+*/
+
+
+const findDuplicate2 = (arr, n, m) => {
+
+    // TC O(M) to build the heap
+    heaptify(arr, 0, m);        // heaptify the first m+1 elements
+
+    for (let i = 0; i < m; ++i) { // O(M)
+        arr[i] = heap.pop();
+        heaptify(arr, 1, m); // O(logM)
+        if (i > 0 && arr[i] === arr[i-1]) return arr[i];
+    }
+
+    return -1;
+}
+
+
+/*
+    O(n) time
+*/
+
+
+const findDuplicate = arr => {
+    const size = arr.length;
+    const ans = [];
+
+    for (let i = 0; i < size; ++i) {
+        const item = Math.abs(arr[i]);
+        if (arr[item] > 0)
+            arr[item] *= -1;
+        else
+            ans.push(item);
+    }
+
+    return ans;
+}
+
+console.log(findDuplicate([1,2,3,1])); // 1
+console.log(findDuplicate([1,1])); // 1
+console.log(findDuplicate([1,3,2,4,5,6, 3,3,3])); // 3 <=== 3, 3, 3
+
+
+/*
+    O(n*m) < O(n^2) time
+    <O(M) space
+    don't mutate the original array
+*/
+We want to find a number betweeen [1, M] logM iteration
+M = 6
+
+condition O(n)
+[1 ... 3]
+[1,2,3,4,5,1] 4 =
+
+[1...N] [1..M]
+
+        [1..M/2] [M/2..M]
+
+        [1..M/4] [M/4..M/2]
+
+NlogM
+
+/*
+    O(n) time
+    O(1) space
+    without mutating the array
+*/
+
+
+/*
+    HTTP vs TCP
+     - layer 7: application level
+         URL
+         stateless?
+         SSL - HTTPS
+             3 way handshake
+             exchange the certificate
+             server (certificate) -> client
+             client (certificate) -> server (optional)
+             encrypt(randomkey, server publickey) -> send to server
+             server to decrypt to get the symmetric key
+         request type
+         header - access control - origin  - agent - connection properties
+         cookies - set in local storage - used to identify the client - session
+         caching - cache server
+         response status
+     - layer 4: network layer
+         IP
+         TCP: secured information
+         UDP: real time game event communication
+          - thin TCP: linear backup instead of exponential backup
+          - fast retransmit: only wait for one ACK
+*/
+
+
+
+
+
